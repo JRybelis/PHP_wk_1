@@ -40,7 +40,6 @@ $favouriteActressSurname = "Mitra";
 $concatenatedName = substr($favouriteActressName, -3).substr($favouriteActressSurname, -3);
 echo $concatenatedName;
 echo "<br>";
-echo substr($favouriteActressName,-2, 2);
 
 ?>
 <h2>5. Vowels a replaced</h2>
@@ -68,7 +67,7 @@ echo "There are a total of $vowelCount letters 'a', both lowercase and uppercase
 <h2>7. All vowels replaced </h2>
 <?php
 
-$vowels = array('a', 'e', 'i', 'o', 'u', 'y', 'A', 'E', 'I', 'O', 'U', 'Y');
+$vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
 
 $vowelReplacement = str_ireplace($vowels, "", $movieName);
 echo $vowelReplacement;
@@ -95,17 +94,6 @@ echo $vowelReplacement;
 $starWars = 'Star Wars: Episode ' . str_repeat(' ', rand(0, 5)) . rand(1, 9) . ' - A New Hope';
 
 echo "The ".(int) filter_var($starWars, FILTER_SANITIZE_NUMBER_INT)." episode of Star Wars.";
-// echo $starWars;
-
-// if ($starWars == 'Star Wars: Episode 1 - A New Hope') {
-//     echo "The ".(int) filter_var($starWars, FILTER_SANITIZE_NUMBER_INT)."st episode of Star Wars."; 
-// } elseif ($starWars == 'Star Wars: Episode 2 - A new Hope') {
-//     echo "The ".(int) filter_var($starWars, FILTER_SANITIZE_NUMBER_INT)."nd episode of Star Wars."; 
-// }elseif ($starWars == 'Star Wars: Episode 3 - A new Hope') {
-// echo "The ".(int) filter_var($starWars, FILTER_SANITIZE_NUMBER_INT)."rd episode of Star Wars.";
-// } else {
-//     echo "The ".(int) filter_var($starWars, FILTER_SANITIZE_NUMBER_INT)."th episode of Star Wars.";
-// }
 
 ?>
 <h2>9. Words of 5 letters or less counted </h2>
@@ -125,14 +113,15 @@ unset($value);
 echo $shortWordCount;
 echo "<br>";
 
-$filmName = "Tik nereikia gąsdinti Pietų Centro, geriant sultis pas save kvartale";
-$filmNameArray = explode(" ", $filmName);
+$filmNameLt = "Tik nereikia gąsdinti Pietų Centro, geriant sultis pas save kvartale";
+$filmNameArrayLt = explode(" ", $filmNameLt);
 $shortWordCount = 0;
-foreach($filmNameArray as &$value) {
+foreach($filmNameArrayLt as &$value) {
     if (mb_strlen($value) <= 5){
         $shortWordCount++;
     }
 }
+unset($value);
 echo $shortWordCount;
 ?>
 <h2>10. Random three-letter word generator </h2>
@@ -144,7 +133,21 @@ $secondLetterGenerator = $latinAlphabet[rand(0, 25)];
 $thirdLetterGenerator = $latinAlphabet[rand(0, 25)];
 $randomWordGenerator = $firstLetterGenerator.$secondLetterGenerator.$thirdLetterGenerator;
 echo $randomWordGenerator;
+echo "<br>";
+echo substr(str_shuffle('qwertyuiopasdfghjklzxcvbnm'), 0, 3);
 
+?>
+<h2>11. Random 10-word string generator </h2>
+<?php
 
+$wordPool = array_merge(str_replace(',', ' ', $filmNameArray) , str_replace(',', ' ', $filmNameArrayLt));
+shuffle($wordPool);
+$randomArray = array();
+$randomSentence = "";
 
+for ($i = 0; $i <= 9; $i++) {
+    array_push($randomArray, $wordPool[$i]);
+}
 
+$randomSentence = implode(' ', $randomArray);
+echo $randomSentence;

@@ -219,11 +219,19 @@ if (($integer1 < 10 || $integer1 > 90) && ($integer3 < 10 || $integer3 > 90)) {
 if (($integer2 < 10 || $integer2 > 90) && ($integer3 < 10 || $integer3 > 90)) {
     $mean2 = $integer1;
 }
+if (($integer2 < 10 || $integer2 > 90) && ($integer3 < 10 || $integer3 > 90) && ($integer1 < 10 || $integer1 > 90)) {
+    $mean2 = 0;
+} else {
+    $mean2 = $mean1;
+}
 
 echo "The mean value of integers $integer1, $integer2 and $integer3 is $mean1.";
 echo "<br>";
-echo "The mean value of integers $integer1, $integer2 and $integer3, which are no lower than 10 and no higer than 90, is $mean2.";
-
+if ($mean2 == $mean1) {
+    echo "Integers $integer1, $integer2 and $integer3 are not lower than 10 or higher than 90, so the mean result remains the same: $mean2.";
+} else {
+    echo "The mean value of integers $integer1, $integer2 and $integer3, which are no lower than 10 and no higer than 90, is $mean2.";
+}
 ?>
 <h2>10. Digital clock timestamp </h2>
 <?php
@@ -264,7 +272,93 @@ $seconds = $newSeconds % 60;
 echo "The clock updated its log to $hours hours, $minutes minutes, $seconds seconds.";
 
 ?>
-<h2>11</h2>
+<h2>11. 6 random numbers sorted descending</h2>
+<?php
+// Crazy task. Incomplete.
+
+// $randomNo1 = rand(1000, 9999);
+// $randomNo2 = rand(1000, 9999);
+// $randomNo3 = rand(1000, 9999);
+// $randomNo4 = rand(1000, 9999);
+// $randomNo5 = rand(1000, 9999);
+// $randomNo6 = rand(1000, 9999);
+// $first = 0;
+// $second = 0;
+// $third = 0;
+// $fourth = 0;
+// $fifth = 0;
+// $sixth = 0;
+// $concatenatedRandomNos = 0;
+
+// echo $randomNo1;
+// echo "<br>";
+// echo $randomNo2;
+// echo "<br>";
+// echo $randomNo3;
+// echo "<br>";
+// echo $randomNo4;
+// echo "<br>";
+// echo $randomNo5;
+// echo "<br>";
+// echo $randomNo6;
+// echo "<br>";
+
+
+
+// if ($randomNo1 > $randomNo2) {
+//     $first = $randomNo1;
+//     $second = $randomNo2;
+//     if ($randomNo3 > $first) {
+//         $first = $randomNo3;
+//         $second = $randomNo1;
+//         $third = $randomNo2;
+//         if ($randomNo4 > $first) {
+//             $first = $randomNo4;
+//             $second = $randomNo3;
+//             $third = $randomNo1;
+//             $fourth = $randomNo2;
+//         } elseif ($randomNo4 < $first && $randomNo4 > $second) {
+//             $second = $randomNo4;
+//             $third = $randomNo1;
+//             $fourth = $randomNo2;
+//         } elseif ($randomNo4 < $second && $randomNo4 > $third) {
+//             $third = $randomNo4;
+//             $fourth = $randomNo2;
+//         } elseif ($randomNo4 < $third) {
+//             $fourth = $randomNo4;
+//         }
+//     } elseif ($randomNo3 < $first && $randomNo3 > $second) {
+//         $second = $randomNo3;
+//         $third = $randomNo2;
+//         if ($randomNo4 > $first) {
+//             $first = $randomNo4;
+//             $second = $randomNo1;
+//             $third = $randomNo3;
+//             $fourth = $randomNo2;
+//         }
+//     } elseif ($randomNo3 < $second) {
+//         $third = $randomNo3;
+//     }
+        
+// } elseif ($randomNo1 < $randomNo2) {
+//     $first = $randomNo2;
+//     $second = $randomNo1;
+//     if ($randomNo3 > $first) {
+//         $first = $randomNo3;
+//         $second = $randomNo2;
+//         $third = $randomNo1;
+//     } elseif ($randomNo3 < $first && $randomNo3 > $second) {
+//         $second = $randomNo3;
+//         $third = $randomNo1;
+//     } elseif ($randomNo3 < $first && $randomNo3 < $second) {
+//         $third = $randomNo3;
+//     }
+// }
+
+
+// $concatenatedRandomNos = $first.' '.$second.' '.$third;
+// echo $concatenatedRandomNos;
+echo "<br>";
 
 
 
