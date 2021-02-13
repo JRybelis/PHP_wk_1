@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./css/loops.css">
 </head>
 <body>
-<h2>1. A fixed 400-symbol-long line of asterixes</h2>
+<h2>1. A fixed 400-symbol-long line of asterixes.</h2>
 <?php
 
 $asteriskLineLength = 400;
@@ -19,7 +19,7 @@ for ($i = 1; $i <= $asteriskLineLength;  $i++) {
 }
 
 ?>
-<h3>a) Wrap string, according to user screen width </h3>
+<h3>a) Wrap string, according to user screen width. </h3>
 <?php
 
 for ($i = 1; $i <= $asteriskLineLength;  $i++) {
@@ -27,7 +27,7 @@ for ($i = 1; $i <= $asteriskLineLength;  $i++) {
 }   
 
 ?>
-<h3>b) Wrap string at every 50 symbols</h3>
+<h3>b) Wrap string at every 50 symbols.</h3>
 <?php
 
 $asteriskLineBreakpoint = 50;
@@ -40,7 +40,7 @@ for ($i = 1; $i <= $asteriskLineLength/$asteriskLineBreakpoint;  $i++) {
 }
 
 ?>
-<h2>2. 300 random numbers, values higher than 275 displayed in red</h2>
+<h2>2. 300 random numbers, values higher than 275 displayed in red.</h2>
 <?php
 
 $numberGenerator = [];
@@ -69,7 +69,7 @@ echo '<br>';
 echo "There are $numbersExceeding150 numbers that are higher than 150.";
 
 ?>
-<h2>3. Numbers divisible by 77 without remainder</h2>
+<h2>3. Numbers divisible by 77 without remainder.</h2>
 <?php
 
 $numberRange = [];
@@ -83,11 +83,170 @@ $numberRange = implode(', ', $numberRange);
 echo $numberRange;
 
 ?>
-<h2>4.</h2>
-<h2>5.</h2>
-<h2>6. </h2>
-<h2>7. </h2>
-<h2>8. </h2>
+<h2>4. Creating a square.</h2>
+<?php
+
+$asteriskLineLength = 25;
+$asteriskRowLength = 25;
+
+for ($i = 1; $i <= $asteriskRowLength; $i++) {
+    for ($j = 1; $j <= $asteriskLineLength; $j++) {
+        echo '<span style = "display: inline-block; height: 5px; width: 5px; padding-left: 15px; line-height: 80%">*</span>';
+    }
+    echo '<br>';
+}
+
+?>
+<h2>5. Red diagonals for the square. </h2>
+<?php
+
+for ($i = 1; $i <= $asteriskRowLength; $i++) {
+    for ($j = 1; $j <= $asteriskLineLength; $j++) {
+        if ($j === $i || $j === ($asteriskRowLength + 1 - $i)) {
+            echo '<span style = "display: inline-block; height: 5px; width: 5px; padding-left: 15px; line-height: 80%; color: red">*</span>';
+        } else {
+            echo '<span style = "display: inline-block; height: 5px; width: 5px; padding-left: 15px; line-height: 80%">*</span>';
+        } 
+    }
+    echo '<br>';
+}
+
+?>
+<h2>6. Coin toss. </h2>
+<h3>a) Heads once. </h3>
+<?php
+
+
+$heads = 0;
+$tails = 0;
+$toss = null;
+$game = true;
+
+while ($game) {
+    $toss = rand(0, 1);
+    if ($toss == 0) {
+        $heads ++;
+        $game = false;
+    } else {
+        $tails ++;
+    }
+}
+echo "The amount of times the toss resulted in heads: $heads";
+echo '<br>';
+echo "The amount of times the toss resulted in tails: $tails";
+
+?>
+<h3> b) Heads thrice. </h3>
+<?php
+
+$game2 = true;
+while ($game2) {
+    $toss = rand(0, 1);
+    if ($toss == 0) {
+        $heads ++;
+    } else {
+        $tails ++;
+    }
+    if ($heads == 3) {
+        $game2 = false;
+    }
+}
+echo "The amount of times the toss resulted in heads: $heads";
+echo '<br>';
+echo "The amount of times the toss resulted in tails: $tails";
+
+?>
+<h3> c) Heads thrice in a row. </h3>
+<?php
+
+$game3 = true;
+$coinTossIndex = 0;
+$headsStreak = 0;
+
+while ($game3) {
+    $toss = rand(0, 1);
+    $coinTossIndex ++;
+    if ($toss == 0) {
+        $heads ++;
+        $headsStreak ++;
+        if ($headsStreak == 3) {
+            $game3 = false;
+        }
+    } else {
+        $tails ++;
+        $headsStreak --;
+    }
+}
+echo "The amount of times the toss resulted in heads: $heads";
+echo '<br>';
+echo "The amount of times the toss resulted in tails: $tails";
+echo '<br>';
+echo "It took $coinTossIndex times to reach the first streak of 3 heads in a row.";
+?>
+<h2>7. Checkers matches. First to reach 222 points - wins. </h2>
+<?php
+
+$qasimirMatchPoints = 0;
+$qasimirPointsTally = 0;
+$peterMatchPoints = 0;
+$peterPointsTally = 0;
+$checkersMatches = 0;
+$checkersGame = true;
+
+while ($checkersGame) {
+    $qasimirMatchPoints = rand(5, 25);
+    $qasimirPointsTally += $qasimirMatchPoints;
+    $peterMatchPoints = rand(10, 20);
+    $peterPointsTally += $peterMatchPoints;
+    $checkersMatches ++;
+    if ($qasimirMatchPoints > $peterMatchPoints) {
+        echo "The match concluded with Qasimir winning over Peter, $qasimirMatchPoints to $peterMatchPoints.";
+    } elseif ($peterMatchPoints > $qasimirMatchPoints) {
+        echo "The match concluded with Peter winning over Qasimir, $peterMatchPoints to $qasimirMatchPoints.";
+    } else {
+        echo "The match concluded with a draw between Peter and Qasimir, at $peterMatchPoints to $qasimirMatchPoints.";
+    }
+    echo '<br>';
+    if ($qasimirPointsTally >= 222 || $peterPointsTally >= 222) {
+        $checkersGame = false;
+    }
+}
+echo '<br>';
+if ($qasimirPointsTally > $peterPointsTally) {
+echo "The game ended after $checkersMatches matches, with Qasimir reaching $qasimirPointsTally and Peter -  $peterPointsTally points. Qasimir was the winner of the game.";
+} elseif ($peterPointsTally > $qasimirPointsTally) {
+    echo "The game ended after $checkersMatches matches, with Qasimir reaching $qasimirPointsTally and Peter -  $peterPointsTally points. Peter was the winner of the game.";
+} else {
+    echo "The game ended after $checkersMatches matches, with Qasimir reaching $qasimirPointsTally and Peter -  $peterPointsTally points. The concluded in a draw.";
+}
+echo '<br>';
+
+?>
+<h2>8. Creating a sparkling rhombus.</h2>
+<?php
+
+$asteriskLineLength = 21;
+// $asteriskRowLength = 21;
+
+for ($i = 0; $i < 2 * $asteriskLineLength + 1; $i++) {
+    for ($j = 2; $j < abs($i - $asteriskLineLength); $j++) {
+        echo ' ';
+    }
+    if ($i < $asteriskLineLength + 1) {
+        for ($k = 0; $k < 2 * $i + 1; $k++) {
+            echo '* ';
+        }
+    } elseif ($i > $asteriskLineLength) {
+            for ($l = 0; $l < 2 * $asteriskLineLength - 1; $l++) {
+                echo '* ';
+            }
+            $asteriskLineLength --;
+        }
+        echo ' ';
+    }
+
+
+?>
 <h2>9. </h2>
 <h2>10. </h2>
 <h2>11. Extra credit: </h2>    
