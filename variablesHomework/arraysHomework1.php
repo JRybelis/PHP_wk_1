@@ -142,6 +142,8 @@ foreach ($randomIntegersArray2 as $key => $value) {
         break;
     }
 }
+unset($value);
+unset($key);
 
 ?>
 <h3>i) Removing all equal index elements from the array.</h3>
@@ -154,12 +156,185 @@ foreach ($randomIntegersArray2 as $key => $value) {
 }
 echo 'The array with its equal index elements removed: <br>';
 print_r($randomIntegersArray2);
+unset($value);
+unset($key);
 
 ?>
-<h2></h2>
-<h2></h2>
-<h2></h2>
-<h2></h2>
+<h2>3. Array made of randomly ocurring A, B, C & D.</h2>
+<?php
+
+$capitalLetterArray = [];
+$letterACounter = 0;
+$letterBCounter = 0;
+$letterCCounter = 0;
+$letterDCounter = 0;
+
+foreach(range(1, 200) as &$value) {
+    switch (rand(0, 3)) {
+        case 0:
+            array_push($capitalLetterArray, 'A');
+            $letterACounter++;
+            break;
+        case 1:
+            array_push($capitalLetterArray, 'B');
+            $letterBCounter++;
+            break;
+        case 2:
+            array_push($capitalLetterArray, 'C');
+            $letterCCounter++;
+            break;
+        case 3:
+            array_push($capitalLetterArray, 'D');
+            $letterDCounter++;
+            break;
+    }
+}
+$stringifiedArray = implode(', ', $capitalLetterArray);
+echo "$stringifiedArray <br><br>";
+echo "There are $letterACounter letters A in the array. <br>";
+echo "There are $letterBCounter letters B in the array. <br>";
+echo "There are $letterCCounter letters C in the array. <br>";
+echo "There are $letterDCounter letters D in the array. <br>";
+
+unset($value);
+
+?>
+<h2>4. The task 3 array elements sorted alphabetically.</h2>
+<?php
+
+sort($capitalLetterArray, SORT_LOCALE_STRING);
+$stringifiedArray = implode(', ', $capitalLetterArray);
+echo "$stringifiedArray <br><br>";
+// print_r($capitalLetterArray);
+
+?>
+<h2>5. Three arrays made as per task 3 requirements. All merged and unique pairings counted. </h2>
+<?php
+
+$capitalLetterArray2 = [];
+$capitalLetterArray3 = [];
+$capitalLetterArray4 = [];
+$capitalLetterArrayCombined = [];
+$uniquePairingsArray = [];
+
+foreach(range(1, 200) as &$value) {
+    switch (rand(0, 3)) {
+        case 0:
+            array_push($capitalLetterArray2, 'A');
+            $letterACounter++;
+            break;
+        case 1:
+            array_push($capitalLetterArray2, 'B');
+            $letterBCounter++;
+            break;
+        case 2:
+            array_push($capitalLetterArray2, 'C');
+            $letterCCounter++;
+            break;
+        case 3:
+            array_push($capitalLetterArray2, 'D');
+            $letterDCounter++;
+            break;
+    }
+}
+foreach(range(1, 200) as &$value) {
+    switch (rand(0, 3)) {
+        case 0:
+            array_push($capitalLetterArray3, 'A');
+            $letterACounter++;
+            break;
+        case 1:
+            array_push($capitalLetterArray3, 'B');
+            $letterBCounter++;
+            break;
+        case 2:
+            array_push($capitalLetterArray3, 'C');
+            $letterCCounter++;
+            break;
+        case 3:
+            array_push($capitalLetterArray3, 'D');
+            $letterDCounter++;
+            break;
+    }
+}
+foreach(range(1, 200) as &$value) {
+    switch (rand(0, 3)) {
+        case 0:
+            array_push($capitalLetterArray4, 'A');
+            $letterACounter++;
+            break;
+        case 1:
+            array_push($capitalLetterArray4, 'B');
+            $letterBCounter++;
+            break;
+        case 2:
+            array_push($capitalLetterArray4, 'C');
+            $letterCCounter++;
+            break;
+        case 3:
+            array_push($capitalLetterArray4, 'D');
+            $letterDCounter++;
+            break;
+    }
+}
+
+foreach(range(0, 199) as &$value) {
+    $elementPairing = $capitalLetterArray2[$value].$capitalLetterArray3[$value].$capitalLetterArray4[$value];
+    if (!$capitalLetterArray4[$value]) {
+        $elementPairing = $capitalLetterArray2[$value].$capitalLetterArray3[$value];
+    }
+    array_push($capitalLetterArrayCombined, $elementPairing);
+}
+
+ 
+// Option 1: looping through to filter out repeating values. 
+foreach ($capitalLetterArrayCombined as $value) {
+    if (!in_array($value, $uniquePairingsArray)) {
+        array_push($uniquePairingsArray, $value);
+    }
+}
+// Option 2: function that assigns unique values to a new array
+$filter = array_unique($capitalLetterArrayCombined, SORT_STRING);
+
+echo 'Unique combinations from the three arrays: ';
+echo count($filter);
+echo '<br>'; 
+
+echo 'Unique combinations from the three arrays: ';
+echo count($uniquePairingsArray);
+echo '<br>';
+print_r($uniquePairingsArray);
+
+unset($value);
+unset($key);
+
+?>
+<h2>6. 2 arrays with unique elements.</h2>
+<?php
+
+$uniqueValuesArray1 = [];
+$uniqueValuesArray2 = [];
+
+while (count($uniqueValuesArray1) < 100) {
+// foreach (range(0, 100) as &$value) {
+    $randomElement = rand(100, 999);
+    if (!in_array($randomElement,$uniqueValuesArray1)){ 
+    array_push($uniqueValuesArray1, $randomElement);
+    }
+}
+while (count($uniqueValuesArray2) < 100) {
+// foreach (range(0, 100) as &$value) {
+    $randomElement = rand(100, 999);
+    if (!in_array($randomElement,$uniqueValuesArray2)){ 
+    array_push($uniqueValuesArray2, $randomElement);
+    }
+}
+echo '<pre>';
+echo count($uniqueValuesArray1);
+echo '<br>';
+echo count($uniqueValuesArray2);
+echo '</pre>';
+?>
 <h2></h2>
 <h2></h2>
 <h2></h2>
