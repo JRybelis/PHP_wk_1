@@ -7,6 +7,8 @@ for ($i = 0; $i < 30; $i++) {
     array_push($randomIntegersArray, rand(5, 25));
 }
 print_r($randomIntegersArray);
+_d($randomIntegersArray);
+
 
 ?>
 <h2>2. Picking through the array generated above:</h2>
@@ -380,7 +382,6 @@ while ($iterator < 10) {
     $number1 = $number2;
     $number2 = $number3;
     $iterator ++;
-    echo " apsisukimas $iterator <br>";
 }
 echo '<pre>';
 print_r($fibonacciArray);

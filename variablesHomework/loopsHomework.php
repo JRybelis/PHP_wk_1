@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loops homework</title>
-    <link rel="stylesheet" href="./css/loops.css">
 </head>
 <body>
 <h2>1. A fixed 400-symbol-long line of asterixes.</h2>
@@ -60,7 +59,7 @@ for ($i = 1; $i <=$amountOfCycles; $i++) {
         $numbersExceeding150 ++;
     }
 } 
-$numberGenerator = implode(' ', $numberGenerator);
+$numberGenerator =  implode(' ', $numberGenerator);
 $highNumberGenerator = implode(' ', $highNumberGenerator);
 echo $numberGenerator;
 echo ' ';
@@ -225,30 +224,133 @@ echo '<br>';
 <h2>8. Creating a sparkling rhombus.</h2>
 <?php
 
-$asteriskLineLength = 21;
-// $asteriskRowLength = 21;
+$asteriskColumnLength = 11;
 
-for ($i = 0; $i < 2 * $asteriskLineLength + 1; $i++) {
-    for ($j = 2; $j < abs($i - $asteriskLineLength); $j++) {
-        echo ' ';
+for ($i = 0; $i < $asteriskColumnLength; $i++) {
+    $asterisk = '';
+    $j = -1;
+    while ($j < $i) {
+        $randomRed = rand(0, 225);
+        $randomGreen = rand(0, 225);
+        $randomBlue = rand(0, 225);
+        $asterisk .="<span style =\"color: rgb($randomRed, $randomGreen, $randomBlue)\">*</span>";
+        $j++;
     }
-    if ($i < $asteriskLineLength + 1) {
-        for ($k = 0; $k < 2 * $i + 1; $k++) {
-            echo '* ';
-        }
-    } elseif ($i > $asteriskLineLength) {
-            for ($l = 0; $l < 2 * $asteriskLineLength - 1; $l++) {
-                echo '* ';
-            }
-            $asteriskLineLength --;
-        }
-        echo ' ';
+    echo str_repeat("<span style='display: inline-block; height: 7px; width: 4px; '>&nbsp</span>", $asteriskColumnLength - $i);
+    echo "<span style = 'display: inline-block; height: 7px; width: 4px;'>$asterisk</span>";
+    echo '<br>';
+}
+for ($i = $asteriskColumnLength - 1; $i > 0; $i--) {
+    $asterisk = '';
+    $j = 0;
+    while ($j < $i) {
+        $randomRed = rand(0, 225);
+        $randomGreen = rand(0, 225);
+        $randomBlue = rand(0, 225);
+        $asterisk .="<span style =\"color: rgb($randomRed, $randomGreen, $randomBlue)\">*</span>";
+        $j++;
     }
-
+    echo str_repeat("<span style='display: inline-block; height: 7px; width 4px;'>&nbsp</span>", $asteriskColumnLength + 1 - $i);
+    echo "<span style ='display: inline-block; height: 7px; width: 4px;'>$asterisk</span>";
+    echo '<br>';
+}
 
 ?>
-<h2>9. </h2>
-<h2>10. </h2>
+<h2>9. Time elapsed comparison</h2>
+<?php
+
+$code1 = "10 bezdzioniu \n suvalge 20 bananu.";
+$code2 = '10 bezdzioniu \n suvalge 20 bananu.'; 
+$firstInstance = 0;
+$lastInstance = 0;
+$timeElapsed = 0;
+
+for ($i = 0; $i <1000000; $i++) {
+    if ($i == 0) {
+        (float) $firstInstance = microtime();
+        echo "The cycles begin at $firstInstance";
+        echo '<br>';
+    }
+    $code1;
+    if ($i == 999999) {
+        (float) $lastInstance = microtime();
+        echo "The cycles finish at $lastInstance";
+        echo '<br>';
+    }
+}
+(float) $timeElapsed = (float) $lastInstance - (float) $firstInstance;
+echo "Running code1 took $timeElapsed";
+echo '<br><br>';
+
+for ($i = 0; $i <1000000; $i++) {
+    if ($i == 0) {
+        (float) $firstInstance = microtime();
+        echo "The cycles begin at $firstInstance";
+        echo '<br>';
+    }
+    $code2;
+    if ($i == 999999) {
+        (float) $lastInstance = microtime();
+        echo "The cycles finish at $lastInstance";
+        echo '<br>';
+    }
+}
+(float) $timeElapsed = (float) $lastInstance - (float) $firstInstance;
+echo "Running code2 took $timeElapsed";
+
+?>
+<h2>10. Nail-driving simulator</h2>
+<h3>a) 5 nails, using small strikes</h3>
+<?php
+
+$nailLenghth = 85;
+$smallStrike = rand(5, 20);
+$strikesRequired = 0;
+
+for ($i = 0; $i < 5; $i++) {
+    do {
+        $nailLenghth -= $smallStrike;
+        $strikesRequired ++;
+        echo $nailLenghth;
+        echo '<br>';
+        if ($nailLenghth < 0) {
+            $nailLenghth = 0;
+        } 
+    } while ($nailLenghth > 0);
+}
+$strikesRequired;
+echo "It took $strikesRequired small hammer strikes to drive 5 nails in.";
+
+?>
+
+<h3>b) 5 nails, using large strikes, with 50% accuracy</h3>
+<?php
+
+$nailLenghth = 85;
+$largeStrike = rand(20, 30);
+$largeStrikeChance = rand(0, 1);
+$strikesRequired = 0;
+
+for ($i = 0; $i < 5; $i++) {
+    if ($largeStrikeChance = 1) {
+        do {
+            $nailLenghth -= $largeStrike;
+            $strikesRequired ++;
+            echo $nailLenghth;
+            echo '<br>';
+            if ($nailLenghth < 0) {
+                $nailLenghth = 0;
+            } 
+        } while ($nailLenghth > 0);
+    } else {
+        continue;
+    }
+}
+$strikesRequired;
+
+echo "It took $strikesRequired large hammer strikes to drive 5 nails in.";
+
+?>
 <h2>11. Extra credit: </h2>    
 </body>
 </html>
