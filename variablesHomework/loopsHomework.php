@@ -306,20 +306,39 @@ echo "Running code2 took $timeElapsed";
 $nailLenghth = 85;
 $smallStrike = rand(5, 20);
 $strikesRequired = 0;
+$nailsDrivenIn = 0;
 
-for ($i = 0; $i < 5; $i++) {
-    do {
-        $nailLenghth -= $smallStrike;
-        $strikesRequired ++;
-        echo $nailLenghth;
-        echo '<br>';
-        if ($nailLenghth < 0) {
-            $nailLenghth = 0;
+while ($nailsDrivenIn < 5) {
+    $nailLenghth -= $smallStrike;
+    $strikesRequired ++;
+    if ($nailLenghth <= 0) {
+        $nailLenghth = 85;
+        $nailsDrivenIn++;
+        if ($nailsDrivenIn == 1) {
+            echo "First nail driven in. <br>";
         } 
-    } while ($nailLenghth > 0);
+        if ($nailsDrivenIn == 2) {
+            echo "Second nail driven in. <br>";
+        } 
+        if ($nailsDrivenIn == 3) {
+            echo "Third nail driven in. <br>";
+        } 
+        if ($nailsDrivenIn == 4) {
+            echo "Fourth nail driven in. <br>";
+        } 
+        if ($nailsDrivenIn == 5) {
+            echo "Fifth nail driven in. <br>";
+        }
+        continue; 
+    }
+    echo "$nailLenghth mm left to drive in.";
+    echo '<br>';
 }
+    
+
+
 $strikesRequired;
-echo "It took $strikesRequired small hammer strikes to drive 5 nails in.";
+echo "<br> It took $strikesRequired small hammer strikes to drive 5 nails in.";
 
 ?>
 
@@ -330,24 +349,38 @@ $nailLenghth = 85;
 $largeStrike = rand(20, 30);
 $largeStrikeChance = rand(0, 1);
 $strikesRequired = 0;
+$nailsDrivenIn = 0;
 
-for ($i = 0; $i < 5; $i++) {
-    if ($largeStrikeChance = 1) {
-        do {
-            $nailLenghth -= $largeStrike;
-            $strikesRequired ++;
-            echo $nailLenghth;
-            echo '<br>';
-            if ($nailLenghth < 0) {
-                $nailLenghth = 0;
-            } 
-        } while ($nailLenghth > 0);
-    } else {
+while ($nailsDrivenIn < 5) {
+    if ($largeStrikeChance == 1) {
+        $nailLenghth -= $largeStrike;
+    }
+    $strikesRequired++;
+    if ($nailLenghth <= 0) {
+        $nailLenghth = 85;
+        $nailsDrivenIn++;
+        if ($nailsDrivenIn == 1) {
+            echo "First nail driven in. <br>";
+        } 
+        if ($nailsDrivenIn == 2) {
+            echo "Second nail driven in. <br>";
+        } 
+        if ($nailsDrivenIn == 3) {
+            echo "Third nail driven in. <br>";
+        } 
+        if ($nailsDrivenIn == 4) {
+            echo "Fourth nail driven in. <br>";
+        } 
+        if ($nailsDrivenIn == 5) {
+            echo "Fifth nail driven in. <br>";
+        }
         continue;
     }
+    echo "$nailLenghth mm left to drive in.";
+    echo '<br>'; 
 }
-$strikesRequired;
 
+$strikesRequired;
 echo "It took $strikesRequired large hammer strikes to drive 5 nails in.";
 
 ?>
