@@ -316,14 +316,12 @@ $uniqueValuesArray1 = [];
 $uniqueValuesArray2 = [];
 
 while (count($uniqueValuesArray1) < 100) {
-// foreach (range(0, 100) as &$value) {
     $randomElement = rand(100, 999);
     if (!in_array($randomElement,$uniqueValuesArray1)){ 
     array_push($uniqueValuesArray1, $randomElement);
     }
 }
 while (count($uniqueValuesArray2) < 100) {
-// foreach (range(0, 100) as &$value) {
     $randomElement = rand(100, 999);
     if (!in_array($randomElement,$uniqueValuesArray2)){ 
     array_push($uniqueValuesArray2, $randomElement);
@@ -333,10 +331,59 @@ echo '<pre>';
 echo count($uniqueValuesArray1);
 echo '<br>';
 echo count($uniqueValuesArray2);
+echo '<br>';
+// print_r(array_count_values($uniqueValuesArray1)); to check if any repeating values slipped through
+echo '<br>';
+// print_r(array_count_values($uniqueValuesArray2)); to check if any repeating values slipped through
 echo '</pre>';
+
 ?>
-<h2></h2>
-<h2></h2>
-<h2></h2>
-<h2></h2>
+<h2>7. Array containing unique elements from the first task 6 array, which are not found in the second task 6 array.</h2>
+<?php
+
+$uniqueValuesArray3 = array_diff($uniqueValuesArray1, $uniqueValuesArray2);
+print_r($uniqueValuesArray3);
+
+?>
+<h2>8. Array containing repeating elements in both arrays from task 6.</h2>
+<?php
+
+$repeatingValuesArray = array_intersect($uniqueValuesArray1, $uniqueValuesArray2);
+print_r($repeatingValuesArray);
+
+?>
+<h2>9. Array containing element values from the first task 6 array as indexes, and element values from the second task 6 array as values.</h2>
+<?php
+
+$combinedArray = array_combine($uniqueValuesArray1, $uniqueValuesArray2);
+echo '<pre>';
+print_r($combinedArray);
+
+?>
+<h2>10. Array consisting of a fibonacci sequence.</h2>
+<?php
+
+$number1 = rand(5, 25);
+$number2 = rand(5, 25);
+$number3 = 0;
+$iterator = 0;
+$fibonacciArray = [];
+
+while ($iterator < 10) {
+    if ($number1 > $number2) {
+        $temp = $number1;
+        $number1 = $number2;
+        $number1 = $temp;
+    }
+    array_push($fibonacciArray, $number1);
+    $number3 = $number2 + $number1;
+    $number1 = $number2;
+    $number2 = $number3;
+    $iterator ++;
+    echo " apsisukimas $iterator <br>";
+}
+echo '<pre>';
+print_r($fibonacciArray);
+
+?>
 <h2></h2>
