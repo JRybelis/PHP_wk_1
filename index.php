@@ -9,7 +9,7 @@ var_dump("10" == "1e1"); // 10 == 10 -> true
 var_dump(100 == "1e2"); // 100 == 100 -> true
 echo '</pre>';
 ?>
-<h2>concatnating with .</h2>
+<h2>Concatinating with .</h2>
 <?php
 
 $z1 = 'Whale';
@@ -22,7 +22,7 @@ echo ${'z'.$rand};
 echo '<br>';
 
 ?>
-<h2>constructing strings with sprintf()</h2>
+<h2>Constructing strings with sprintf()</h2>
 <?php
 
 $number = 5;
@@ -78,18 +78,6 @@ foreach(range(1, 10) as $index1 => $_) {
 }
 
 _dc($array);
-
-$counter = 0;
-foreach($array as $value1) {
-    foreach($value1 as $value2) {
-        if (10 < $value2) {
-            $counter++;
-        }
-    }
-}
-
-_dc($counter);
-
 
 usort($array, function($a, $b)
 {
