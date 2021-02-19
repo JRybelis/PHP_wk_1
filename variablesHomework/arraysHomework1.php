@@ -387,4 +387,66 @@ echo '<pre>';
 print_r($fibonacciArray);
 
 ?>
-<h2></h2>
+<h2>Extra credit: random array with highest value in the middle, other elements descending towards the edges.</h2>
+<?php
+
+$randomIntegersArray = [];
+$xArray = [];
+$xAxisNegativeArray = [];
+$xAxisPositiveArray = [];
+$highestValueElement = 0;
+$arrayMiddlePosition = 0;
+$iterator = 0;
+
+while (count($randomIntegersArray) < 101) {
+    $randomElement = rand(0, 300);
+    if (!in_array($randomElement, $randomIntegersArray)){
+        $randomIntegersArray[] = $randomElement;
+    }
+}
+
+$arrayMiddlePosition = ceil(count($randomIntegersArray)/2);
+
+foreach ($randomIntegersArray as &$value) {
+    if ($value > $highestValueElement) {
+        $highestValueElement = $value;
+    }
+}
+
+$xArray[51] = $highestValueElement;
+sort($randomIntegersArray);
+array_pop($randomIntegersArray);
+
+
+foreach ($randomIntegersArray as $key => &$value) {
+    if ($key % 2 == 0) {
+        $xAxisNegativeArray[] = $value;
+    } else {
+        $xAxisPositiveArray[] = $value;
+    }
+}
+
+rsort($xAxisNegativeArray); // goes to the left of the highest element, but due to array_unshift prepending starting with its first index, this mus be in reverse order to ascend to the highest element in the middle.
+sort($xAxisPositiveArray);
+
+do {
+    $temp = $xAxisNegativeArray[$iterator];
+    $xAxisNegativeArray[$iterator] = $xAxisPositiveArray[count($xAxisPositiveArray) - 1 - $iterator];
+    $xAxisPositiveArray[count($xAxisPositiveArray) - 1 - $iterator] = $temp;
+    $iterator++; 
+} while (abs(array_sum($xAxisNegativeArray) - array_sum($xAxisPositiveArray)) > 30);
+
+foreach ($xAxisNegativeArray as $key => &$value) {
+    array_unshift($xArray, $value);
+}
+
+$xArray = array_merge($xArray, array_reverse($xAxisPositiveArray));
+
+echo 'The difference between the sum of elements of the two ends of the array: ';
+echo abs(array_sum($xAxisNegativeArray) - array_sum($xAxisPositiveArray));
+echo '<br>';
+_dc($randomIntegersArray);
+echo '<br>';
+_dc($xArray);
+
+?>
