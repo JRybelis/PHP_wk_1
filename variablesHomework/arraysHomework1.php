@@ -395,7 +395,6 @@ $xArray = [];
 $xAxisNegativeArray = [];
 $xAxisPositiveArray = [];
 $highestValueElement = 0;
-$arrayMiddlePosition = 0;
 $iterator = 0;
 
 while (count($randomIntegersArray) < 101) {
@@ -404,8 +403,6 @@ while (count($randomIntegersArray) < 101) {
         $randomIntegersArray[] = $randomElement;
     }
 }
-
-$arrayMiddlePosition = ceil(count($randomIntegersArray)/2);
 
 foreach ($randomIntegersArray as &$value) {
     if ($value > $highestValueElement) {
