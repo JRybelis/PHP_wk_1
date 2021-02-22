@@ -161,9 +161,34 @@ $shiftingArray = [];
 
 for ($i=0; $i < 10; $i++) { 
     for ($j=0; $j < 10; $j++) { 
-        $shiftingArray[] 
+        $shiftingArray[] = rand(1, 100); 
+    }
+    return $shiftingArray;
+}
+
+function arrayElementMeanValueChecker($meanThreshold) {
+    $primeElementSum = 0;
+    $primeElementCounter = 0;
+    $lowestValueElement = 100;
+    global $shiftingArray;
+    foreach ($shiftingArray as $key => $value) {
+        foreach ($value as $key2 => $value2) {
+            if ($value2 < $lowestValueElement) {
+                $lowestValueElement = $value2;
+            }
+            if ($key2 == gmp_prob_prime($shiftingArray[$key][$key2])) {
+                $primeElementSum += $key2;
+                $primeElementCounter++;
+            }
+        }
+    }
+    if ($primeElementSum / $primeElementCounter < $meanThreshold) {
+        $lowestValueElement += 3;
+        // $primeElementSum += arrayElementMeanValueChecker($meanThreshold);
     }
 }
+
+$result2 = arrayElementMeanValueChecker(70);
 
 ?>
 <h1>11. </h1>
