@@ -195,12 +195,9 @@ $alphabetUppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 for ($i = 0; $i < 10; $i++) {
     for ($j = 0; $j < rand(2, 20); $j++) {
         $charArray1[$i][$j] = $alphabetUppercase[rand(0,25)];
-    }    
+    }
+    sort($charArray1[$i],SORT_STRING);
 }   
-
-foreach ($charArray1 as $key1 => $value1) {
-    sort($charArray1[$key1],SORT_STRING);
-}
 
 _dc($charArray1);
 ?>
@@ -272,7 +269,6 @@ $randomArray = [];
 
 for ($i = 0; $i < 10; $i++) {
     $subArrayChance = rand(0, 5);
-    echo $subArrayChance.'<br>';
     if (rand(0, 5) == 0) {
         $randomArray[] = rand(0, 10);
     } else {
@@ -320,10 +316,13 @@ for ($i = 0; $i < 10; $i++) {
 
 for ($i = 0; $i < count($squareDataArray); $i++) {
     for ($j = 0; $j < count($squareDataArray[$i]); $j++) {
-        print_r("<span style = 'display: inline-block; height: 5px; width: 5px; padding-left: 35px; line-height: 80%; color: ".$squareDataArray[$i][$j]['color'].";>". $squareDataArray[$i][$j]['value']."</span>");
+        $symbolColor = $squareDataArray[$i][$j]['color'];
+        print_r("<span style = 'display: inline-block; height: 5px; width: 5px; padding-left: 20px; line-height: 80%; color: $symbolColor'>". $squareDataArray[$i][$j]['value']."</span>");
+        // print_r("<p style = 'display: inline-block; height: 5px; width: 5px; padding-left: 30px; line-height: 80%; color: ".$squareDataArray[$i][$j]['color'].";>". $squareDataArray[$i][$j]['value']."</p>");
     }
     echo '<br><br>';
 }
         
+
 ?>
 <h2></h2>
