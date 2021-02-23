@@ -20,7 +20,14 @@ echo headlineGenerator2('A modern way to cook.', rand(1, 6));
 <h1>3. </h1>
 <?php
 
+$timeCode = md5(time());
+_dc($timeCode);
 
+$timeCodeChanged = preg_replace_callback('/\d+/', function($digitMatch){
+    return headlineGenerator($digitMatch[0]);
+}, $timeCode);
+
+_dc($timeCodeChanged);
 
 ?>
 <h1>4. Function that finds the amount of whole numbers its argument can be divided by, without a remainder.</h1>
@@ -72,9 +79,9 @@ for ($i=0; $i < 100; $i++) {
 echo 'Before removal';
 _dc($array2);
 
-foreach ($array2 as $key => $value) {
-    if (countDividers($array2[$key]) == 0) { 
-        unset($array2[$i]);
+foreach ($array2 as $key => &$value) {
+    if (countDividers($value)['count'] === 0) { 
+        unset($array2[$key]);
     }
 }
 
@@ -84,10 +91,10 @@ _dc($array2);
 unset($key, $value);
 
 ?>
-<h1>7. </h1>
+<h1>7. Recursive array generator.</h1>
 <?php
 
-$recursiveArray = [];
+// $recursiveArray = [];
 
 function recursiveArrayGenerator($arrayDepth) {
     $arrayLength = rand(10, 20);
@@ -98,7 +105,6 @@ function recursiveArrayGenerator($arrayDepth) {
         $recursiveArray[$arrayLength - 1] = recursiveArrayGenerator(--$arrayDepth);
     } elseif ($arrayDepth == 0) {
         $recursiveArray[$arrayLength - 1] = 0;
-        // return $recursiveArray;
     }
     return $recursiveArray;
 }
@@ -128,29 +134,27 @@ _dc(recursiveArrayPrimitiveElementSum($generateArray));
 <h1>9. A Function to create a dynamic array that contains only non-prime numbers. First prime number it generates, breaks the function.</h1>
 <?php
 
-function dynamicArrayGenerator($element) {
-    $dynamicArray = [];
-    $arrayLength = 3;
-    for ($i=0; $i < $arrayLength ; $i++) { 
-        $dynamicArray[] = $element;
-    }
-    foreach ($dynamicArray as $key => $value) {
-        if (!gmp_prob_prime($dynamicArray[$key])) {
-            $element;
-            $dynamicArray[] = $element;
-        } else {
-            break;
-        }
-    // foreach ($dynamicArray as $key => $value) {
-    //     while (!gmp_prob_prime($dynamicArray[$key])) {
-    //         $dynamicArray[] += $element;
-    //     } 
-    // }
-    
-    }
-    return $dynamicArray;
+$arrayLength = 3;
+for ($i=0; $i < $arrayLength ; $i++) { 
+    $dynamicArray[] = rand(1,33);
 }
-$result = dynamicArrayGenerator(rand(1,33));
+_dc($dynamicArray);
+
+function dynamicArrayGenerator($dynamicArray) {
+    $currentArray = $dynamicArray;
+    // _dc($currentArray);
+    foreach (array_splice($currentArray, -3) as $value) {
+        if (gmp_prob_prime($value) != 2) {
+            $currentArray[] = rand(1, 33);
+            // $currentArray += dynamicArrayGenerator($value);
+            array_push($currentArray, dynamicArrayGenerator($currentArray));
+            // return $currentArray;
+            // break;
+        } 
+    }
+    return $currentArray;
+}
+$result = dynamicArrayGenerator($dynamicArray);
 _dc($result);
 
 ?>
@@ -169,7 +173,7 @@ for ($i=0; $i < 10; $i++) {
 function arrayElementMeanValueChecker($meanThreshold) {
     $primeElementSum = 0;
     $primeElementCounter = 0;
-    $lowestValueElement = 100;
+    $lowestValueElement = 101;
     global $shiftingArray;
     foreach ($shiftingArray as $key => $value) {
         foreach ($value as $key2 => $value2) {
